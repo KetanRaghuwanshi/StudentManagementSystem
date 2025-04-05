@@ -51,7 +51,6 @@ Password: admin123
 ✅ Input validation (e.g., unique IDs, age limits)
 📤 Export data to CSV/Excel
 
---
 
 🙋‍♂️ Author
 👨‍💻 Ketan Raghuwanshi
