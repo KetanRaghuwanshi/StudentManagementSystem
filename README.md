@@ -1,6 +1,6 @@
 # 🎓 Student Management System
 
-A simple **Command-Line Interface (CLI)** based Student Management System built in **Java**. This project allows users to perform basic operations like adding, viewing, updating, and deleting student records.
+A fully functional **JavaFX-based Student Management System**. This GUI-based project allows users to perform core operations like adding, viewing, updating, deleting, and searching student records, with data persistence.
 
 ---
 
@@ -11,54 +11,85 @@ A simple **Command-Line Interface (CLI)** based Student Management System built 
 - 📖 View all students
 - 🔁 Update existing student details
 - ❌ Delete a student
-- 💾 Save/load data to file (`students.txt`)
-- 🚪 Exit the application
+- 🔍 Search student by ID
+- 📎 Automatically save/load data to/from file (`students.txt`)
+- 🚪 Logout to login screen
+
+---
+
+## 🖼️ User Interface
+Built entirely using **JavaFX**, the GUI offers a clean and interactive interface:
+
+- Consistent and responsive layout
+- Back buttons for navigation between forms
+- Search results shown inline
 
 ---
 
 ## 🛠️ Technologies Used
 
 - ☕ Java (JDK 8+)
+- 🎨 JavaFX
 - 💡 IntelliJ IDEA (for development)
 - 🌐 Git & GitHub (for version control)
 
 ---
 
 ## 📁 Project Structure
-📂 StudentManagementSystem/ └── 📁 src/ ├── 📄 Main.java // CLI menu and app runner ├── 📄 Student.java // Student data model 
-├── 📄 StudentManagement.java // Core logic (add/view/update/delete) └── 📄 Login.java // User login/authentication
+
+```
+📂 StudentManagementSystem/
+└── 📂 src/
+    ├── 📄 Main.java                // Launches the app via LoginScreen
+    ├── 📄 Student.java             // Student data model
+    ├── 📄 StudentManagement.java   // Core logic (add/view/update/delete/search/load/save)
+    ├── 📄 LoginScreen.java         // Login UI screen
+    ├── 📄 Dashboard.java           // Main menu after login
+    ├── 📄 AddStudentForm.java      // UI for adding students
+    ├── 📄 ViewStudentsTable.java   // UI for viewing all students
+    ├── 📄 UpdateStudentForm.java   // UI for updating student data
+    ├── 📄 DeleteStudentForm.java   // UI for deleting a student
+    └── 📄 SearchStudentForm.java   // UI for searching a student by ID
+```
 
 ---
-
 
 ## 🚀 How to Run
 
 1. 🌀 Clone the repository:
-   ```bash
-   git clone https://github.com/KetanRaghuwanshi/StudentManagementSystem.git
-2. 🛠️ Open the project in IntelliJ IDEA or any Java IDE
-3. ▶️ Run Main.java
+```bash
+git clone https://github.com/KetanRaghuwanshi/StudentManagementSystem.git
+```
+2. 🛠️ Open the project in IntelliJ IDEA (or any Java IDE)
+3. ▶️ Run `Main.java`
 4. 🔑 Login Credentials:
-
+```
 Username: admin
 Password: admin123
+```
 
 ---
 
-🌱 Future Enhancements
-1. 🖼️ Build a GUI version using JavaFX or Swing
-2. 🧑‍💻 Add user registration (not just hardcoded login)
-3. ✅ Input validation (e.g., unique IDs, age limits)
-4. 📤 Export data to CSV/Excel
+## 🌱 Future Enhancements
 
+1. 🌗 Theme toggle (light/dark)
+2. 🔍 Search by name or course
+3. 📄 Export data to PDF/CSV/Excel
+4. 🧑‍🏫 Profile picture support
+5. 🧑‍💻 Multi-user system (admin & students)
 
-🙋‍♂️ Author
+---
+
+## 👨‍⚕️ Author
+
 - 👨‍💻 Ketan Raghuwanshi
 - 📧 ketanraghuwanshi11@gmail.com
-- 🔗 GitHub Profile
+- 🔗 [GitHub Profile](https://github.com/KetanRaghuwanshi)
 
-⭐️ Show your support
-If you like this project, consider starring ⭐ it on GitHub!
+---
+
+⭐️ **Show your support**  
+If you like this project, please consider giving it a star ⭐ on GitHub!
 
 
 
