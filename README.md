@@ -23,8 +23,8 @@ A simple **Command-Line Interface (CLI)** based Student Management System built 
 ---
 
 ## 📁 Project Structure
-StudentManagementSystem/ ├── src/ │ ├── Main.java # Entry point with CLI menu │ 
-├── Student.java # Student data model │ └── StudentManagement.java # Core logic for managing students
+StudentManagementSystem/ ├── src/ │ ├── Main.java # Entry point with CLI menu │ ├── Student.java # Student data model 
+│ └── StudentManagement.java # Core logic & file saving/loading ├── students.txt # Stores student data (auto-generated)
 
 
 ---
@@ -34,8 +34,12 @@ StudentManagementSystem/ ├── src/ │ ├── Main.java # Entry point wi
 1. Clone the repository:
    ```bash
    git clone https://github.com/KetanRaghuwanshi/StudentManagementSystem.git
+   
 2. Open the project in IntelliJ IDEA or any Java IDE.
+ 
 3. Run the Main.java file.
+Students will load from students.txt if it exists.
+On exit, all data is saved automatically.
 
 ---
 
@@ -43,6 +47,9 @@ StudentManagementSystem/ ├── src/ │ ├── Main.java # Entry point wi
 💾 Add file save/load functionality
 🔐 Implement login/authentication system
 🖥️ Develop a GUI version using Java Swing
+🔐 Implement login/authentication system
+🖼️ Develop a GUI version using Java Swing
+📊 Add search/filter/sort functionality
 
 --
 
@@ -53,12 +60,19 @@ Ketan Raghuwanshi
 ⭐️ Show your support
 If you like this project, consider starring ⭐ it on GitHub!
 
-### ✅ What to do now:
-1. Open your IntelliJ project.
-2. Edit `README.md` and replace it with this cleaned-up version.
-3. Commit and push it to GitHub:
-   ```bash
-   git add README.md
-   git commit -m "Improve README formatting and content"
-   git push origin master
+
+---
+
+### ✅ What to Do Now:
+
+1. Open your `README.md` file in IntelliJ  
+2. Replace everything with the updated content above  
+3. Then:
+
+#### 👉 Commit & Push it:
+```bash
+git add README.md
+git commit -m "Update README with file saving feature"
+git push origin master
+
 
