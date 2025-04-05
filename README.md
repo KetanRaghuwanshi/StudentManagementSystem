@@ -10,8 +10,8 @@ A simple **Command-Line Interface (CLI)** based Student Management System built 
 - 📖 View all students
 - 🔁 Update existing student details
 - ❌ Delete a student
+- 💾 Save/load data from file
 - 🚪 Exit the application
-
 ---
 
 ## 🛠️ Technologies Used
