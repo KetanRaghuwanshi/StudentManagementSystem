@@ -22,26 +22,33 @@ public class StudentManagement {
     }
 
     // 🔁 Update Student
-    public void updateStudent(int id, String name, int age, String course) {
+    // 🔁 Update Student
+    public boolean updateStudent(int id, String name, int age, String course) {
         Student student = studentMap.get(id);
         if (student != null) {
             student.setName(name);
             student.setAge(age);
             student.setCourse(course);
             System.out.println("✅ Student updated.");
+            return true;
         } else {
             System.out.println("❌ Student not found.");
+            return false;
         }
     }
 
+
     // ❌ Delete Student
-    public void deleteStudent(int id) {
+    public boolean deleteStudent(int id) {
         if (studentMap.remove(id) != null) {
             System.out.println("✅ Student deleted.");
+            return true;
         } else {
             System.out.println("❌ Student not found.");
+            return false;
         }
     }
+
 
     // 💾 Save to File
     public void saveToFile(String filename) {
@@ -56,6 +63,12 @@ public class StudentManagement {
             System.out.println("❌ Error saving file: " + e.getMessage());
         }
     }
+
+    // 📋 Get All Students
+    public Collection<Student> getAllStudents() {
+        return studentMap.values();
+    }
+
 
     // 📂 Load from File
     public void loadFromFile(String filename) {
