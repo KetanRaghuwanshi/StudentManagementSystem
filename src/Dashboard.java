@@ -34,11 +34,12 @@ public class Dashboard extends Application {
         Button addBtn = new Button("➕ Add Student");
         Button viewBtn = new Button("👁 View Students");
         Button updateBtn = new Button("✏️ Update Student");
+        Button searchButton = new Button("🔍 Search Student");
         Button deleteBtn = new Button("❌ Delete Student");
         Button logoutBtn = new Button("🚪 Logout");
 
         // Button styling
-        for (Button btn : new Button[]{addBtn, viewBtn, updateBtn, deleteBtn, logoutBtn}) {
+        for (Button btn : new Button[]{addBtn, viewBtn, updateBtn, searchButton, deleteBtn, logoutBtn}) {
             btn.setPrefWidth(200);
             btn.setFont(Font.font("Arial", FontWeight.NORMAL, 16));
         }
@@ -69,11 +70,17 @@ public class Dashboard extends Application {
             login.start(primaryStage);
         });
 
+        searchButton.setOnAction(e -> {
+            SearchStudentForm searchForm = new SearchStudentForm(sm);
+            searchForm.show(primaryStage);
+        });
+
+
         // Layout
         VBox vbox = new VBox(15);
         vbox.setAlignment(Pos.CENTER);
         vbox.setPadding(new Insets(30));
-        vbox.getChildren().addAll(title, addBtn, viewBtn, updateBtn, deleteBtn, logoutBtn);
+        vbox.getChildren().addAll(title, addBtn, viewBtn, updateBtn,searchButton, deleteBtn, logoutBtn);
 
         // Scene
         Scene scene = new Scene(vbox, 400, 400);

@@ -3,10 +3,17 @@ import java.util.*;
 
 public class StudentManagement {
     private Map<Integer, Student> studentMap = new HashMap<>();
+    private static final String FILE_NAME = "students.txt"; // 📁 Data file
+
+    // ✅ Constructor: Load data from file on startup
+    public StudentManagement() {
+        loadFromFile(FILE_NAME);
+    }
 
     // ✅ Add Student
     public void addStudent(Student student) {
         studentMap.put(student.getId(), student);
+        saveToFile(FILE_NAME);
         System.out.println("✅ Student added successfully!");
     }
 
@@ -22,13 +29,13 @@ public class StudentManagement {
     }
 
     // 🔁 Update Student
-    // 🔁 Update Student
     public boolean updateStudent(int id, String name, int age, String course) {
         Student student = studentMap.get(id);
         if (student != null) {
             student.setName(name);
             student.setAge(age);
             student.setCourse(course);
+            saveToFile(FILE_NAME);
             System.out.println("✅ Student updated.");
             return true;
         } else {
@@ -37,10 +44,10 @@ public class StudentManagement {
         }
     }
 
-
     // ❌ Delete Student
     public boolean deleteStudent(int id) {
         if (studentMap.remove(id) != null) {
+            saveToFile(FILE_NAME);
             System.out.println("✅ Student deleted.");
             return true;
         } else {
@@ -49,12 +56,10 @@ public class StudentManagement {
         }
     }
 
-
     // 💾 Save to File
     public void saveToFile(String filename) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             for (Student student : studentMap.values()) {
-                // Saving in format: id,name,age,course
                 writer.write(student.getId() + "," + student.getName() + "," + student.getAge() + "," + student.getCourse());
                 writer.newLine();
             }
@@ -64,16 +69,13 @@ public class StudentManagement {
         }
     }
 
-    // 📋 Get All Students
-    public Collection<Student> getAllStudents() {
-        return studentMap.values();
-    }
-
-
     // 📂 Load from File
     public void loadFromFile(String filename) {
         File file = new File(filename);
-        if (!file.exists()) return;
+        if (!file.exists()) {
+            System.out.println("📂 No existing data found. Starting fresh.");
+            return;
+        }
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
@@ -91,5 +93,15 @@ public class StudentManagement {
         } catch (IOException e) {
             System.out.println("❌ Error loading file: " + e.getMessage());
         }
+    }
+
+    // 📋 Get All Students
+    public Collection<Student> getAllStudents() {
+        return studentMap.values();
+    }
+
+    // 🔍 Get Student by ID
+    public Student getStudentById(int id) {
+        return studentMap.get(id);
     }
 }
