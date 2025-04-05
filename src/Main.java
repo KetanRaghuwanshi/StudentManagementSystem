@@ -2,31 +2,40 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         StudentManagement sm = new StudentManagement();
+        String filename = "students.txt"; // 📁 File for saving/loading
+
+        // 📂 Load existing student data
+        sm.loadFromFile(filename);
 
         while (true) {
-            System.out.println("\n--- Student Management System ---");
-            System.out.println("1. Add Student");
-            System.out.println("2. View Students");
-            System.out.println("3. Update Student");
-            System.out.println("4. Delete Student");
-            System.out.println("5. Exit");
+            System.out.println("\n🎓 Student Management System");
+            System.out.println("1️⃣ Add Student");
+            System.out.println("2️⃣ View Students");
+            System.out.println("3️⃣ Update Student");
+            System.out.println("4️⃣ Delete Student");
+            System.out.println("5️⃣ Exit");
             System.out.print("Enter your choice: ");
-            int choice = sc.nextInt();
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // clear newline
 
             switch (choice) {
                 case 1:
                     System.out.print("Enter ID: ");
-                    int id = sc.nextInt();
-                    sc.nextLine(); // consume newline
+                    int id = scanner.nextInt();
+                    scanner.nextLine();
+
                     System.out.print("Enter Name: ");
-                    String name = sc.nextLine();
+                    String name = scanner.nextLine();
+
                     System.out.print("Enter Age: ");
-                    int age = sc.nextInt();
-                    sc.nextLine(); // consume newline
+                    int age = scanner.nextInt();
+                    scanner.nextLine();
+
                     System.out.print("Enter Course: ");
-                    String course = sc.nextLine();
+                    String course = scanner.nextLine();
+
                     sm.addStudent(new Student(id, name, age, course));
                     break;
 
@@ -36,31 +45,37 @@ public class Main {
 
                 case 3:
                     System.out.print("Enter ID to update: ");
-                    id = sc.nextInt();
-                    sc.nextLine(); // consume newline
+                    int updateId = scanner.nextInt();
+                    scanner.nextLine();
+
                     System.out.print("Enter new Name: ");
-                    name = sc.nextLine();
+                    String newName = scanner.nextLine();
+
                     System.out.print("Enter new Age: ");
-                    age = sc.nextInt();
-                    sc.nextLine(); // consume newline
+                    int newAge = scanner.nextInt();
+                    scanner.nextLine();
+
                     System.out.print("Enter new Course: ");
-                    course = sc.nextLine();
-                    sm.updateStudent(id, name, age, course);
+                    String newCourse = scanner.nextLine();
+
+                    sm.updateStudent(updateId, newName, newAge, newCourse);
                     break;
 
                 case 4:
                     System.out.print("Enter ID to delete: ");
-                    id = sc.nextInt();
-                    sm.deleteStudent(id);
+                    int deleteId = scanner.nextInt();
+                    scanner.nextLine();
+                    sm.deleteStudent(deleteId);
                     break;
 
                 case 5:
+                    // 💾 Save data before exiting
+                    sm.saveToFile(filename);
                     System.out.println("👋 Exiting... Goodbye!");
-                    System.exit(0);
-                    break;
+                    return;
 
                 default:
-                    System.out.println("❌ Invalid choice!");
+                    System.out.println("❌ Invalid choice. Try again.");
             }
         }
     }
