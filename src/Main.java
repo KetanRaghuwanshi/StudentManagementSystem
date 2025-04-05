@@ -1,7 +1,13 @@
 import java.util.Scanner;
 
+
 public class Main {
     public static void main(String[] args) {
+        // 🔐 Login Check
+        if (!Login.authenticate()) {
+            return;
+        }
+
         Scanner scanner = new Scanner(System.in);
         StudentManagement sm = new StudentManagement();
         String filename = "students.txt"; // 📁 File for saving/loading
