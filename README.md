@@ -46,16 +46,16 @@ Password: admin123
 ---
 
 🌱 Future Enhancements
-🖼️ Build a GUI version using JavaFX or Swing
-🧑‍💻 Add user registration (not just hardcoded login)
-✅ Input validation (e.g., unique IDs, age limits)
-📤 Export data to CSV/Excel
+1. 🖼️ Build a GUI version using JavaFX or Swing
+2. 🧑‍💻 Add user registration (not just hardcoded login)
+3. ✅ Input validation (e.g., unique IDs, age limits)
+4. 📤 Export data to CSV/Excel
 
 
 🙋‍♂️ Author
-👨‍💻 Ketan Raghuwanshi
-📧 ketanraghuwanshi11@gmail.com
-🔗 GitHub Profile
+- 👨‍💻 Ketan Raghuwanshi
+- 📧 ketanraghuwanshi11@gmail.com
+- 🔗 GitHub Profile
 
 ⭐️ Show your support
 If you like this project, consider starring ⭐ it on GitHub!
