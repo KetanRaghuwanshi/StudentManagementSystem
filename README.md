@@ -58,8 +58,6 @@ Password: admin123
 📧 ketanraghuwanshi11@gmail.com
 🔗 GitHub Profile
 
---
-
 ⭐️ Show your support
 If you like this project, consider starring ⭐ it on GitHub!
 
