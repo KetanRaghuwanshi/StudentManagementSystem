@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 public class AddStudentForm {
 
-    private StudentManagement sm;
+    private final StudentManagement sm;
 
     public AddStudentForm(StudentManagement sm) {
         this.sm = sm;
