@@ -43,13 +43,16 @@ Built entirely using **JavaFX**, the GUI offers a clean and interactive interfac
     ├── 📄 Main.java                // Launches the app via LoginScreen
     ├── 📄 Student.java             // Student data model
     ├── 📄 StudentManagement.java   // Core logic (add/view/update/delete/search/load/save)
+    ├── 📄 Login.java               // User authentication logic
     ├── 📄 LoginScreen.java         // Login UI screen
     ├── 📄 Dashboard.java           // Main menu after login
+    ├── 📄 DatabaseConnection.java // Database connection logic (JDBC)
     ├── 📄 AddStudentForm.java      // UI for adding students
     ├── 📄 ViewStudentsTable.java   // UI for viewing all students
     ├── 📄 UpdateStudentForm.java   // UI for updating student data
     ├── 📄 DeleteStudentForm.java   // UI for deleting a student
     └── 📄 SearchStudentForm.java   // UI for searching a student by ID
+
 ```
 
 ---
