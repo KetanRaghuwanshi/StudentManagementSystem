@@ -29,9 +29,11 @@ Built entirely using **JavaFX**, the GUI offers a clean and interactive interfac
 ## 🛠️ Technologies Used
 
 - ☕ Java (JDK 8+)
-- 🎨 JavaFX
+- 🌐 MySQL (for data storage)
 - 💡 IntelliJ IDEA (for development)
-- 🌐 Git & GitHub (for version control)
+- 🌍 Git & GitHub (for version control)
+- 🎨 JavaFX (for building the graphical user interface)
+- 🔗 JDBC (for database connectivity and performing CRUD operations with MySQL)
 
 ---
 
@@ -42,18 +44,16 @@ Built entirely using **JavaFX**, the GUI offers a clean and interactive interfac
 └── 📂 src/
     ├── 📄 Main.java                // Launches the app via LoginScreen
     ├── 📄 Student.java             // Student data model
-    ├── 📄 StudentManagement.java   // Core logic (add/view/update/delete/search/load/save)
+    ├── 📄 StudentManagement.java   // Core logic (add/view/update/delete/search/load/save using JDBC)
     ├── 📄 Login.java               // User authentication logic
     ├── 📄 LoginScreen.java         // Login UI screen
     ├── 📄 Dashboard.java           // Main menu after login
-    ├── 📄 DatabaseConnection.java  // Database connection logic (JDBC)
+    ├── 📄 DatabaseConnection.java  // Database connection logic using JDBC
     ├── 📄 AddStudentForm.java      // UI for adding students
     ├── 📄 ViewStudentsTable.java   // UI for viewing all students
     ├── 📄 UpdateStudentForm.java   // UI for updating student data
     ├── 📄 DeleteStudentForm.java   // UI for deleting a student
     └── 📄 SearchStudentForm.java   // UI for searching a student by ID
-
-```
 
 ---
 
