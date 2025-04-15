@@ -60,7 +60,7 @@ Built entirely using **JavaFX**, the GUI offers a clean and interactive interfac
 
 1. 🌀 Clone the repository:
 
-git clone https://github.com/KetanRaghuwanshi/StudentManagementSystem.git
+- git clone https://github.com/KetanRaghuwanshi/StudentManagementSystem.git
 
 2. 🛠️ Open the project in IntelliJ IDEA (or any Java IDE)
 
