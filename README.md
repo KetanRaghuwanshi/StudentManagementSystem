@@ -55,13 +55,13 @@ Built entirely using **JavaFX**, the GUI offers a clean and interactive interfac
     └── 📄 SearchStudentForm.java   // UI for searching a student by ID
 
 ---
-
+```
 ## 🚀 How to Run
 
 1. 🌀 Clone the repository:
-```bash
+
 git clone https://github.com/KetanRaghuwanshi/StudentManagementSystem.git
-```
+
 2. 🛠️ Open the project in IntelliJ IDEA (or any Java IDE)
 3. 💾 Make sure MySQL is installed and the Student_management_System database is created with the following table:
  ```bash
