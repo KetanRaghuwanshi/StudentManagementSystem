@@ -63,6 +63,7 @@ Built entirely using **JavaFX**, the GUI offers a clean and interactive interfac
 git clone https://github.com/KetanRaghuwanshi/StudentManagementSystem.git
 
 2. 🛠️ Open the project in IntelliJ IDEA (or any Java IDE)
+
 3. 💾 Make sure MySQL is installed and the Student_management_System database is created with the following table:
  ```bash
  CREATE TABLE students (
@@ -73,8 +74,10 @@ git clone https://github.com/KetanRaghuwanshi/StudentManagementSystem.git
 );
 ```
 4. 📝 Modify the `DatabaseConnection.java` file with your MySQL credentials if necessary (default: `root`, password: `Ketan@2002`).
+ 
 5. ▶️ Run `Main.java` to launch the application.
-6. 🔑 Login Credentials:
+
+7. 🔑 Login Credentials:
 ```
 Username: admin
 Password: admin123
