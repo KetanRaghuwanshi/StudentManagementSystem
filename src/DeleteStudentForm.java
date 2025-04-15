@@ -1,55 +1,73 @@
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class DeleteStudentForm {
+    private final StudentManagement sm;
 
-    private StudentManagement sm;
-
+    // Constructor to pass StudentManagement instance
     public DeleteStudentForm(StudentManagement sm) {
         this.sm = sm;
     }
 
     public void show(Stage primaryStage) {
-        Label titleLabel = new Label("❌ Delete Student");
-        titleLabel.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+        primaryStage.setTitle("❌ Delete Student");
 
+        // Form fields
+        Label idLabel = new Label("Student ID:");
         TextField idField = new TextField();
-        idField.setPromptText("Enter Student ID to delete");
 
-        Label messageLabel = new Label();
+        Button deleteButton = new Button("Delete Student");
+        Button backButton = new Button("Back");
 
-        Button deleteBtn = new Button("Delete");
-        deleteBtn.setOnAction(e -> {
+        // Action: Delete Student
+        deleteButton.setOnAction(e -> {
+            String idText = idField.getText().trim();
+
+            if (idText.isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, "⚠️ Error", "Student ID is required!");
+                return;
+            }
+
             try {
-                int id = Integer.parseInt(idField.getText().trim());
-                boolean deleted = sm.deleteStudent(id);
-                if (deleted) {
-                    messageLabel.setText("✅ Student deleted successfully.");
+                int id = Integer.parseInt(idText);
+                boolean success = sm.deleteStudent(id);
+
+                if (success) {
+                    showAlert(Alert.AlertType.INFORMATION, "✅ Success", "Student deleted successfully!");
+                    idField.clear();
                 } else {
-                    messageLabel.setText("❌ Student not found.");
+                    showAlert(Alert.AlertType.ERROR, "⚠️ Error", "Student not found.");
                 }
             } catch (NumberFormatException ex) {
-                messageLabel.setText("❌ Invalid ID format.");
+                showAlert(Alert.AlertType.ERROR, "⚠️ Invalid Input", "ID must be a number.");
             }
         });
 
-        Button backBtn = new Button("⬅️ Back");
-        backBtn.setOnAction(e -> {
-            Dashboard dash = new Dashboard(sm);
-            dash.start(primaryStage);
+        // Action: Back to Dashboard
+        backButton.setOnAction(e -> {
+            Dashboard dashboard = new Dashboard(sm);
+            dashboard.show(primaryStage);
         });
 
-        VBox layout = new VBox(10, titleLabel, idField, deleteBtn, backBtn, messageLabel);
-        layout.setAlignment(Pos.CENTER);
+        // Layout
+        VBox layout = new VBox(10);
         layout.setPadding(new Insets(20));
+        layout.getChildren().addAll(idLabel, idField, deleteButton, backButton);
 
-        Scene scene = new Scene(layout, 400, 300);
+        Scene scene = new Scene(layout, 300, 250);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Delete Student");
         primaryStage.show();
+    }
+
+    // Utility method for showing alerts
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

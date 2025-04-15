@@ -4,6 +4,7 @@ public class Student {
     private int age;
     private String course;
 
+    // Constructor
     public Student(int id, String name, int age, String course) {
         this.id = id;
         this.name = name;
@@ -11,15 +12,35 @@ public class Student {
         this.course = course;
     }
 
-    // Getters and Setters
-    public int getId() { return id; }
-    public String getName() { return name; }
-    public int getAge() { return age; }
-    public String getCourse() { return course; }
+    // Getter methods
+    public int getId() {
+        return id;
+    }
 
-    public void setName(String name) { this.name = name; }
-    public void setAge(int age) { this.age = age; }
-    public void setCourse(String course) { this.course = course; }
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getCourse() {
+        return course;
+    }
+
+    // Setter methods
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setCourse(String course) {
+        this.course = course;
+    }
 
     @Override
     public String toString() {

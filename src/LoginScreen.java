@@ -36,13 +36,12 @@ public class LoginScreen extends Application {
                 messageLabel.setTextFill(Color.GREEN);
                 messageLabel.setText("✅ Login successful!");
 
-                // Launch Dashboard
-                Dashboard dashboard = new Dashboard();
-                try {
-                    dashboard.start(primaryStage); // Reuse the same stage
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+                // Initialize StudentManagement instance
+                StudentManagement sm = new StudentManagement();
+
+                // Launch Dashboard and pass the StudentManagement instance
+                Dashboard dashboard = new Dashboard(sm); // Pass the StudentManagement instance
+                dashboard.show(primaryStage); // Call show method instead of start
             } else {
                 messageLabel.setTextFill(Color.RED);
                 messageLabel.setText("❌ Invalid username or password.");

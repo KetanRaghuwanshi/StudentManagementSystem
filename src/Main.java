@@ -1,6 +1,5 @@
 import java.util.Scanner;
 
-
 public class Main {
     public static void main(String[] args) {
         // 🔐 Login Check
@@ -10,10 +9,6 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         StudentManagement sm = new StudentManagement();
-        String filename = "students.txt"; // 📁 File for saving/loading
-
-        // 📂 Load existing student data
-        sm.loadFromFile(filename);
 
         while (true) {
             System.out.println("\n🎓 Student Management System");
@@ -46,7 +41,8 @@ public class Main {
                     break;
 
                 case 2:
-                    sm.viewStudents();
+                    // View students (fetch from DB)
+                    sm.getAllStudents().forEach(student -> System.out.println(student));
                     break;
 
                 case 3:
@@ -64,7 +60,7 @@ public class Main {
                     System.out.print("Enter new Course: ");
                     String newCourse = scanner.nextLine();
 
-                    sm.updateStudent(updateId, newName, newAge, newCourse);
+                    sm.updateStudent(new Student(updateId, newName, newAge, newCourse));
                     break;
 
                 case 4:
@@ -75,9 +71,8 @@ public class Main {
                     break;
 
                 case 5:
-                    // 💾 Save data before exiting
-                    sm.saveToFile(filename);
                     System.out.println("👋 Exiting... Goodbye!");
+                    sm.closeConnection();  // Close DB connection on exit
                     return;
 
                 default:

@@ -1,4 +1,3 @@
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -10,7 +9,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class Dashboard extends Application {
+public class Dashboard {
     private StudentManagement sm;
 
     // Constructor that accepts StudentManagement object
@@ -18,13 +17,7 @@ public class Dashboard extends Application {
         this.sm = sm;
     }
 
-    public Dashboard() {
-        // Default constructor for IDE compatibility (not used in GUI flow)
-        this.sm = new StudentManagement();
-    }
-
-    @Override
-    public void start(Stage primaryStage) {
+    public void show(Stage primaryStage) {
         // Title
         Label title = new Label("🎓 Student Management System");
         title.setFont(Font.font("Arial", FontWeight.BOLD, 26));
@@ -44,7 +37,7 @@ public class Dashboard extends Application {
             btn.setFont(Font.font("Arial", FontWeight.NORMAL, 16));
         }
 
-        // 👉 Button actions (✅ now calling .show instead of .start)
+        // 👉 Button actions
         addBtn.setOnAction(e -> {
             AddStudentForm form = new AddStudentForm(sm);
             form.show(primaryStage);
@@ -67,7 +60,7 @@ public class Dashboard extends Application {
 
         logoutBtn.setOnAction(e -> {
             LoginScreen login = new LoginScreen();
-            login.start(primaryStage);
+            login.start(primaryStage);  // Keep this as start() for LoginScreen since it's an Application class
         });
 
         searchButton.setOnAction(e -> {
@@ -75,21 +68,16 @@ public class Dashboard extends Application {
             searchForm.show(primaryStage);
         });
 
-
         // Layout
         VBox vbox = new VBox(15);
         vbox.setAlignment(Pos.CENTER);
         vbox.setPadding(new Insets(30));
-        vbox.getChildren().addAll(title, addBtn, viewBtn, updateBtn,searchButton, deleteBtn, logoutBtn);
+        vbox.getChildren().addAll(title, addBtn, viewBtn, updateBtn, searchButton, deleteBtn, logoutBtn);
 
         // Scene
         Scene scene = new Scene(vbox, 400, 400);
         primaryStage.setTitle("Dashboard - Student Manager");
         primaryStage.setScene(scene);
         primaryStage.show();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

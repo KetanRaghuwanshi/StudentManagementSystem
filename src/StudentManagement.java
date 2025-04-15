@@ -1,107 +1,109 @@
-import java.io.*;
-import java.util.*;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StudentManagement {
-    private Map<Integer, Student> studentMap = new HashMap<>();
-    private static final String FILE_NAME = "students.txt"; // 📁 Data file
 
-    // ✅ Constructor: Load data from file on startup
+    private Connection connection;
+
+    // Constructor uses DatabaseConnection class
     public StudentManagement() {
-        loadFromFile(FILE_NAME);
-    }
-
-    // ✅ Add Student
-    public void addStudent(Student student) {
-        studentMap.put(student.getId(), student);
-        saveToFile(FILE_NAME);
-        System.out.println("✅ Student added successfully!");
-    }
-
-    // 📖 View Students
-    public void viewStudents() {
-        if (studentMap.isEmpty()) {
-            System.out.println("⚠️ No student records found.");
-            return;
-        }
-        for (Student student : studentMap.values()) {
-            System.out.println(student);
+        this.connection = DatabaseConnection.getConnection();
+        if (this.connection == null) {
+            System.err.println("❌ Failed to connect to the database.");
+            System.exit(1); // Exit if the connection is critical
         }
     }
 
-    // 🔁 Update Student
-    public boolean updateStudent(int id, String name, int age, String course) {
-        Student student = studentMap.get(id);
-        if (student != null) {
-            student.setName(name);
-            student.setAge(age);
-            student.setCourse(course);
-            saveToFile(FILE_NAME);
-            System.out.println("✅ Student updated.");
-            return true;
-        } else {
-            System.out.println("❌ Student not found.");
+    // Add a student
+    public boolean addStudent(Student student) {
+        String query = "INSERT INTO students (id, name, age, course) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, student.getId());
+            stmt.setString(2, student.getName());
+            stmt.setInt(3, student.getAge());
+            stmt.setString(4, student.getCourse());
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
     }
 
-    // ❌ Delete Student
-    public boolean deleteStudent(int id) {
-        if (studentMap.remove(id) != null) {
-            saveToFile(FILE_NAME);
-            System.out.println("✅ Student deleted.");
-            return true;
-        } else {
-            System.out.println("❌ Student not found.");
+    // Update a student
+    public boolean updateStudent(Student student) {
+        String query = "UPDATE students SET name = ?, age = ?, course = ? WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, student.getName());
+            stmt.setInt(2, student.getAge());
+            stmt.setString(3, student.getCourse());
+            stmt.setInt(4, student.getId());
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
     }
 
-    // 💾 Save to File
-    public void saveToFile(String filename) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
-            for (Student student : studentMap.values()) {
-                writer.write(student.getId() + "," + student.getName() + "," + student.getAge() + "," + student.getCourse());
-                writer.newLine();
+    // Delete a student
+    public boolean deleteStudent(int studentId) {
+        String query = "DELETE FROM students WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, studentId);
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // Get all students
+    public List<Student> getAllStudents() {
+        List<Student> studentList = new ArrayList<>();
+        String query = "SELECT * FROM students";
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int age = rs.getInt("age");
+                String course = rs.getString("course");
+                studentList.add(new Student(id, name, age, course));
             }
-            System.out.println("📁 Student data saved to file.");
-        } catch (IOException e) {
-            System.out.println("❌ Error saving file: " + e.getMessage());
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return studentList;
     }
 
-    // 📂 Load from File
-    public void loadFromFile(String filename) {
-        File file = new File(filename);
-        if (!file.exists()) {
-            System.out.println("📂 No existing data found. Starting fresh.");
-            return;
-        }
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                if (parts.length == 4) {
-                    int id = Integer.parseInt(parts[0]);
-                    String name = parts[1];
-                    int age = Integer.parseInt(parts[2]);
-                    String course = parts[3];
-                    studentMap.put(id, new Student(id, name, age, course));
+    // Get student by ID
+    public Student getStudentById(int id) {
+        String query = "SELECT * FROM students WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    String name = rs.getString("name");
+                    int age = rs.getInt("age");
+                    String course = rs.getString("course");
+                    return new Student(id, name, age, course);
                 }
             }
-            System.out.println("📂 Student data loaded from file.");
-        } catch (IOException e) {
-            System.out.println("❌ Error loading file: " + e.getMessage());
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return null;
     }
 
-    // 📋 Get All Students
-    public Collection<Student> getAllStudents() {
-        return studentMap.values();
-    }
-
-    // 🔍 Get Student by ID
-    public Student getStudentById(int id) {
-        return studentMap.get(id);
+    // Close connection
+    public void closeConnection() {
+        try {
+            if (connection != null) connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

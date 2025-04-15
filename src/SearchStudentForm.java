@@ -6,8 +6,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class SearchStudentForm {
-    private StudentManagement sm;
+    private final StudentManagement sm;
 
+    // Constructor to pass StudentManagement instance
     public SearchStudentForm(StudentManagement sm) {
         this.sm = sm;
     }
@@ -24,6 +25,7 @@ public class SearchStudentForm {
         Button searchButton = new Button("Search");
         Button backButton = new Button("⬅️ Back");
 
+        // Search Button Action
         searchButton.setOnAction(e -> {
             try {
                 int id = Integer.parseInt(idField.getText().trim());
@@ -38,11 +40,13 @@ public class SearchStudentForm {
             }
         });
 
+        // Back Button Action (now using .show() instead of .start())
         backButton.setOnAction(e -> {
             Dashboard dashboard = new Dashboard(sm);
-            dashboard.start(primaryStage);
+            dashboard.show(primaryStage); // Use show instead of start
         });
 
+        // Layout
         VBox vbox = new VBox(10, titleLabel, idField, searchButton, resultLabel, backButton);
         vbox.setAlignment(Pos.CENTER);
         vbox.setPadding(new Insets(20));

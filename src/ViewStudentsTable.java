@@ -11,9 +11,9 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class ViewStudentsTable {
+    private final StudentManagement sm;
 
-    private StudentManagement sm;
-
+    // Constructor to pass StudentManagement instance
     public ViewStudentsTable(StudentManagement sm) {
         this.sm = sm;
     }
@@ -21,6 +21,7 @@ public class ViewStudentsTable {
     public void show(Stage primaryStage) {
         TableView<Student> table = new TableView<>();
 
+        // Define the columns and their data bindings
         TableColumn<Student, Integer> idCol = new TableColumn<>("ID");
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
 
@@ -33,18 +34,21 @@ public class ViewStudentsTable {
         TableColumn<Student, String> courseCol = new TableColumn<>("Course");
         courseCol.setCellValueFactory(new PropertyValueFactory<>("course"));
 
+        // Add columns to the table
         table.getColumns().addAll(idCol, nameCol, ageCol, courseCol);
 
         // Load student data
         ObservableList<Student> studentList = FXCollections.observableArrayList(sm.getAllStudents());
         table.setItems(studentList);
 
+        // Back button
         Button backButton = new Button("⬅️ Back");
         backButton.setOnAction(e -> {
             Dashboard dashboard = new Dashboard(sm);
-            dashboard.start(primaryStage);
+            dashboard.show(primaryStage);  // Use show() instead of start()
         });
 
+        // Layout
         HBox bottomBox = new HBox(backButton);
         bottomBox.setPadding(new Insets(10));
         bottomBox.setSpacing(10);
@@ -54,6 +58,7 @@ public class ViewStudentsTable {
         layout.setCenter(table);
         layout.setBottom(bottomBox);
 
+        // Scene
         Scene scene = new Scene(layout, 600, 400);
         primaryStage.setTitle("👁 View Students");
         primaryStage.setScene(scene);

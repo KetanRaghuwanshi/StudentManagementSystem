@@ -2,6 +2,7 @@
   <library name="lib">
     <CLASSES>
       <root url="file://D:/pp/openjfx-24_windows-x64_bin-sdk/javafx-sdk-24/lib" />
+      <root url="jar://D:/mysql-connector-j-9.2.0/mysql-connector-j-9.2.0/mysql-connector-j-9.2.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

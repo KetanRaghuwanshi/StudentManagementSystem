@@ -1,77 +1,97 @@
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class AddStudentForm {
+    private final StudentManagement sm;  // Store the reference to StudentManagement
 
-    private final StudentManagement sm;
-
+    // Constructor that accepts StudentManagement instance
     public AddStudentForm(StudentManagement sm) {
-        this.sm = sm;
+        this.sm = sm;  // Store the instance for later use
     }
 
     public void show(Stage primaryStage) {
-        Label titleLabel = new Label("➕ Add New Student");
-        titleLabel.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+        primaryStage.setTitle("➕ Add Student");
 
+        // Form fields
+        Label idLabel = new Label("Student ID:");
         TextField idField = new TextField();
-        idField.setPromptText("ID");
 
+        Label nameLabel = new Label("Name:");
         TextField nameField = new TextField();
-        nameField.setPromptText("Name");
 
+        Label ageLabel = new Label("Age:");
         TextField ageField = new TextField();
-        ageField.setPromptText("Age");
 
+        Label courseLabel = new Label("Course:");
         TextField courseField = new TextField();
-        courseField.setPromptText("Course");
-
-        Label messageLabel = new Label();
 
         Button addButton = new Button("Add Student");
+        Button backButton = new Button("Back");
+
+        // Action: Add Student
         addButton.setOnAction(e -> {
+            String idText = idField.getText().trim();
+            String name = nameField.getText().trim();
+            String ageText = ageField.getText().trim();
+            String course = courseField.getText().trim();
+
+            if (idText.isEmpty() || name.isEmpty() || ageText.isEmpty() || course.isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, "⚠️ Error", "All fields are required!");
+                return;
+            }
+
             try {
-                int id = Integer.parseInt(idField.getText().trim());
-                String name = nameField.getText().trim();
-                int age = Integer.parseInt(ageField.getText().trim());
-                String course = courseField.getText().trim();
+                int id = Integer.parseInt(idText);
+                int age = Integer.parseInt(ageText);
+                Student student = new Student(id, name, age, course);
+                sm.addStudent(student);  // Use StudentManagement instance to add the student
 
-                if (name.isEmpty() || course.isEmpty()) {
-                    messageLabel.setText("⚠️ Please fill all fields.");
-                    return;
-                }
-
-                sm.addStudent(new Student(id, name, age, course));
-                messageLabel.setText("✅ Student added!");
-
-                // Clear fields
-                idField.clear();
-                nameField.clear();
-                ageField.clear();
-                courseField.clear();
-
+                showAlert(Alert.AlertType.INFORMATION, "✅ Success", "Student added successfully!");
+                clearFields(idField, nameField, ageField, courseField);
             } catch (NumberFormatException ex) {
-                messageLabel.setText("❌ Invalid input! Make sure ID and Age are numbers.");
+                showAlert(Alert.AlertType.ERROR, "⚠️ Invalid Input", "ID and Age must be numbers.");
             }
         });
 
-        Button backButton = new Button("⬅️ Back");
+        // Action: Back to Dashboard
         backButton.setOnAction(e -> {
-            Dashboard dashboard = new Dashboard(sm);
-            dashboard.start(primaryStage);
+            Dashboard dashboard = new Dashboard(sm);  // Pass the StudentManagement instance
+            dashboard.show(primaryStage);  // Call show() method instead of start()
         });
 
-        VBox vbox = new VBox(10, titleLabel, idField, nameField, ageField, courseField, addButton, backButton, messageLabel);
-        vbox.setAlignment(Pos.CENTER);
-        vbox.setPadding(new Insets(20));
-        vbox.setStyle("-fx-background-color: #f5faff;");
+        // Layout
+        VBox layout = new VBox(10);
+        layout.setPadding(new Insets(20));
+        layout.getChildren().addAll(
+                idLabel, idField,
+                nameLabel, nameField,
+                ageLabel, ageField,
+                courseLabel, courseField,
+                addButton, backButton
+        );
 
-        Scene scene = new Scene(vbox, 400, 400);
+        Scene scene = new Scene(layout, 300, 350);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Add Student");
         primaryStage.show();
+    }
+
+    // Utility method for showing alerts
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    // Clear the form fields
+    private void clearFields(TextField idField, TextField nameField, TextField ageField, TextField courseField) {
+        idField.clear();
+        nameField.clear();
+        ageField.clear();
+        courseField.clear();
     }
 }
