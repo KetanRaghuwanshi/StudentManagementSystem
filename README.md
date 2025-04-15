@@ -46,7 +46,7 @@ Built entirely using **JavaFX**, the GUI offers a clean and interactive interfac
     ├── 📄 Login.java               // User authentication logic
     ├── 📄 LoginScreen.java         // Login UI screen
     ├── 📄 Dashboard.java           // Main menu after login
-    ├── 📄 DatabaseConnection.java // Database connection logic (JDBC)
+    ├── 📄 DatabaseConnection.java  // Database connection logic (JDBC)
     ├── 📄 AddStudentForm.java      // UI for adding students
     ├── 📄 ViewStudentsTable.java   // UI for viewing all students
     ├── 📄 UpdateStudentForm.java   // UI for updating student data
