@@ -1,6 +1,5 @@
 # 🎓 Student Management System
-
-A fully functional **JavaFX-based Student Management System**. This GUI-based project allows users to perform core operations like adding, viewing, updating, deleting, and searching student records, with data persistence.
+A fully functional JavaFX-based Student Management System. This GUI-based project allows users to perform core operations like adding, viewing, updating, deleting, and searching student records, with JDBC integration for data persistence, ensuring that student data is saved in a MySQL database.
 
 ---
 
