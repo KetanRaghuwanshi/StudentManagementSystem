@@ -63,14 +63,20 @@ CREATE TABLE students (
 
 6. 🔑 Login Credentials:
 
+---
+
 Username: admin
 Password: admin123
+
+---
 
 🌱 Future Enhancements
 🖼️ Build a more advanced GUI version using JavaFX, adding more user-friendly features.
 🧑‍💻 Add user registration (not just hardcoded login).
 ✅ Implement input validation (e.g., unique student IDs, valid age ranges).
 📤 Export data to CSV or Excel for reporting.
+
+---
 
 🙋‍♂️ Author
 👨‍💻 Ketan Raghuwanshi
